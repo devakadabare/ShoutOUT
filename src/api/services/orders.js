@@ -6,7 +6,7 @@ const { v4: uuidv4 } = require('uuid');
 
 let date = new Date();
 
-const addOrder = (data, callback) =>{
+const addOrder = async(data, callback) =>{
     /**
      * items = [{itemId:1 ,quantity: 1, note: ''},{itemId:2 ,quantity: 1, note: ''}]
      */
@@ -41,7 +41,7 @@ const addOrder = (data, callback) =>{
 
 }
 
-const getOrders = (data, callback) =>{
+const getOrders = async (data, callback) =>{
     try {
         const {orderType} = data;
         let additinalOrderQuery= '';
@@ -56,7 +56,7 @@ const getOrders = (data, callback) =>{
 
         const getOrderData = await sequelize.query(getOrderQuery, {type: sequelize.QueryTypes.SELECT});
 
-        const getOrderItemData = getOrderData.map((order) =>{
+        const getOrderItemData = getOrderData.map(async(order) =>{
             let query = `SELECT * FROM 
                             (SELECT itemId,orderId,quantity,note FROM OrderItems WHERE orderId = ${order.orderId}) as OI
                             JOIN 

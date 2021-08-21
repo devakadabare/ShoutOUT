@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     updatedAt: {
       allowNull: false,
-      type: Sequelize.DATE
+      type: DataTypes.DATE
     }
   }, {});
   OrderItem.associate = function(models) {
