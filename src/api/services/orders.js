@@ -42,8 +42,37 @@ const addOrder = (data, callback) =>{
 }
 
 const getOrders = (data, callback) =>{
-    
-}
+    try {
+        const {orderType} = data;
+        let additinalOrderQuery= '';
+        if(orderType){
+            additinalOrderQuery = `WHERE orderType = ${orderType}`
+        }
+        const getOrderQuery = `SELECT * FROM 
+                                (SELECT id as orderId, customerId, status as orderStatus, ordertype FROM Orders ${additinalOrderQuery}) as O 
+                                JOIN 
+                                (SELECT id,firstName, lastName, contact FROM Custmoers) as C 
+                                ON O.customerId = C.id`;
+
+        const getOrderData = await sequelize.query(getOrderQuery, {type: sequelize.QueryTypes.SELECT});
+
+        const getOrderItemData = getOrderData.map((order) =>{
+            let query = `SELECT * FROM 
+                            (SELECT itemId,orderId,quantity,note FROM OrderItems WHERE orderId = ${order.orderId}) as OI
+                            JOIN 
+                            (SELECT id,name, price FROM Items) I
+                            ON OI.itemId = I.id`;
+            const getOrderItemDataFroSingleOrder = await sequelize.query(query, {type: sequelize.QueryTypes.SELECT});
+            return {...order, items: getOrderItemDataFroSingleOrder};
+        });
+
+        const reponse = await Promise.all(getOrderItemData);
+        callback({statusCode: Constants.errorStatus.SUCCESS, body: reponse});
+    } catch (error) {
+        callback({statusCode: Constants.errorStatus.SUCCESS, body: reponse});
+    }
+
+}   
 
 module.exports = {
     addOrder,
