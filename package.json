@@ -6,7 +6,7 @@
   "repository": "git@bitbucket.org:teamimmunify/vendor-api.git",
   "author": "Devaka Dabare",
   "scripts": {
-    "mocha": "./node_modules/mocha/bin/mocha"
+    "test": "mocha"
   },
   "license": "MIT",
   "dependencies": {
