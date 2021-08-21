@@ -1,10 +1,13 @@
 {
-  "name": "vendor-api",
+  "name": "Order-api",
   "version": "1.0.0",
   "description": "for vendor usage and tracking",
   "main": "server.js",
   "repository": "git@bitbucket.org:teamimmunify/vendor-api.git",
-  "author": "Darshana Sandaruwan",
+  "author": "Devaka Dabare",
+  "scripts": {
+    "mocha": "./node_modules/mocha/bin/mocha"
+  },
   "license": "MIT",
   "dependencies": {
     "@hapi/joi": "^16.1.7",
