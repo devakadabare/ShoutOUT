@@ -8,6 +8,7 @@
   "license": "MIT",
   "dependencies": {
     "@hapi/joi": "^16.1.7",
+    "assert": "^2.0.0",
     "aws-sdk": "^2.568.0",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.4",
@@ -30,6 +31,7 @@
     "babel-cli": "^6.26.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
+    "mocha": "^9.1.0",
     "nodemon": "^2.0.2"
   }
 }
