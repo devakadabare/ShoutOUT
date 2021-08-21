@@ -1,0 +1,35 @@
+{
+  "name": "vendor-api",
+  "version": "1.0.0",
+  "description": "for vendor usage and tracking",
+  "main": "server.js",
+  "repository": "git@bitbucket.org:teamimmunify/vendor-api.git",
+  "author": "Darshana Sandaruwan",
+  "license": "MIT",
+  "dependencies": {
+    "@hapi/joi": "^16.1.7",
+    "aws-sdk": "^2.568.0",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mysql": "^2.17.1",
+    "mysql2": "^2.0.0",
+    "sequelize": "^5.21.13",
+    "sequelize-cli": "^5.5.1",
+    "speakeasy": "^2.0.0",
+    "uuid": "^8.1.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/preset-react": "^7.7.4",
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "nodemon": "^2.0.2"
+  }
+}
