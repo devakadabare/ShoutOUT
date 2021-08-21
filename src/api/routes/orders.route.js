@@ -5,7 +5,7 @@ const ordersService = require('../services/orders');
 const routes = express.Router();
 
 routes.post('/', function (req, res) {
-    ordersController.addCustomer(req.body,function (result) {
+    ordersController.addOrder(req.body,function (result) {
         res.status(result.statusCode).send(JSON.stringify(result.body));
     })
 });

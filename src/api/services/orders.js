@@ -8,16 +8,16 @@ let date = new Date();
 
 const addOrder = async(data, callback) =>{
     /**
-     * items = [{itemId:1 ,quantity: 1, note: ''},{itemId:2 ,quantity: 1, note: ''}]
+     * items = [{itemId:1 ,quantity: 1, notes: ''},{itemId:2 ,quantity: 1, notes: ''}]
      */
-    
+    /**
+     * Create database transaction
+     */
+     const transaction = await sequelize.transaction();
     try {
         const {items, customerId, orderType} = data;
-        /**
-         * Create database transaction
-         */
-        const transaction = await sequelize.transaction();
-
+        
+        
         const createdOrder = await models.Order.create(
             {customerId, orderType},
             transaction
@@ -29,12 +29,16 @@ const addOrder = async(data, callback) =>{
                 orderId: createdOrder.id
             }  
         });
+        console.log('================',orderItems)
 
-        const createOrderItems = await models.OrderItem.bulkCreate(orderItems, transaction);
-
+        const createOrderItems = await models.OrderItem.bulkCreate(orderItems, {transaction});
+        console.log('=====createOrderItems===========',createOrderItems)
+        await transaction.commit();
         callback({statusCode: Constants.errorStatus.CREATED, body: createdOrder});
 
     } catch (error) {
+        console.log(error)
+        await transaction.rollback();
         callback({statusCode: Constants.errorStatus.SERVER_ERROR, body: 'Server Error: ErrorCode 101'});
     }
 
