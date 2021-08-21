@@ -55,7 +55,7 @@ const getOrders = async (data, callback) =>{
         const getOrderQuery = `SELECT * FROM 
                                 (SELECT id as orderId, customerId, status as orderStatus, ordertype FROM Orders ${additinalOrderQuery}) as O 
                                 JOIN 
-                                (SELECT id,firstName, lastName, contact FROM Custmoers) as C 
+                                (SELECT id,firstName, lastName, contact FROM Customers) as C 
                                 ON O.customerId = C.id`;
 
         const getOrderData = await sequelize.query(getOrderQuery, {type: sequelize.QueryTypes.SELECT});
@@ -73,6 +73,7 @@ const getOrders = async (data, callback) =>{
         const reponse = await Promise.all(getOrderItemData);
         callback({statusCode: Constants.errorStatus.SUCCESS, body: reponse});
     } catch (error) {
+        console.log(error)
         callback({statusCode: Constants.errorStatus.SUCCESS, body: reponse});
     }
 
